@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Pass RDC</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#f5f7fb;
+  color:#172033;
+}
+
+.container{
+  width:92%;
+  max-width:1050px;
+  margin:auto;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 0;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.badge{
+  background:#e8edff;
+  padding:7px 12px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.hero{
+  text-align:center;
+  padding:55px 0 35px;
+}
+
+.hero h1{
+  font-size:clamp(36px,8vw,64px);
+  margin-bottom:18px;
+}
+
+.hero p{
+  color:#657083;
+  font-size:18px;
+  line-height:1.6;
+  max-width:700px;
+  margin:auto;
+}
+
+button{
+  border:none;
+  border-radius:12px;
+  padding:14px 20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.primary{
+  background:#172033;
+  color:white;
+  margin-top:25px;
+}
+
+.secondary{
+  background:white;
+  border:1px solid #dce1e9;
+}
+
+.section{
+  background:white;
+  border:1px solid #e1e5ec;
+  border-radius:18px;
+  padding:22px;
+  margin:20px 0;
+}
+
+.tools{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:12px;
+  margin-top:20px;
+}
+
+.tool{
+  background:white;
+  border:1px solid #e1e5ec;
+  border-radius:16px;
+  padding:18px;
+  cursor:pointer;
+}
+
+.tool:hover{
+  transform:translateY(-2px);
+}
+
+.tool b{
+  display:block;
+  margin:10px 0 5px;
+}
+
+.tool small{
+  color:#687385;
+}
+
+.hidden{
+  display:none;
+}
+
+textarea{
+  width:100%;
+  min-height:150px;
+  margin-top:12px;
+  padding:15px;
+  border:1px solid #d9dfe8;
+  border-radius:12px;
+  font-size:16px;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.prices{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.price{
+  border:1px solid #e0e5ed;
+  border-radius:16px;
+  padding:20px;
+}
+
+.price strong{
+  display:block;
+  font-size:30px;
+  margin:10px 0;
+}
+
+.note{
+  color:#697386;
+  font-size:13px;
+  line-height:1.5;
+  margin-top:15px;
+}
+
+#credits{
+  font-weight:bold;
+}
+
+.history{
+  margin-top:15px;
+}
+
+.history li{
+  list-style:none;
+  border-bottom:1px solid #edf0f4;
+  padding:10px 0;
+  color:#5e6878;
+}
+
+footer{
+  text-align:center;
+  color:#7a8392;
+  padding:35px 0;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+<div class="logo">
+⚡ AI Pass RDC
+</div>
+
+<div class="badge">
+Prototype V0
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<h1>
+Plusieurs outils IA.<br>
+Un seul accès.
+</h1>
+
+<p>
+Utilise l'intelligence artificielle pour tes études,
+ton business, tes documents, ton contenu et ta programmation.
+</p>
+
+<button class="primary"
+onclick="document.getElementById('workspace').scrollIntoView({behavior:'smooth'})">
+🚀 Tester gratuitement
+</button>
+
+</section>
+
+
+<section class="section" id="workspace">
+
+<h2>
+Que veux-tu faire ?
+</h2>
+
+<div class="tools">
+
+<div class="tool"
+onclick="selectTool('Études')">
+
+📚
+
+<b>Étudier</b>
+
+<small>
+Comprendre, réviser, créer des exercices
+</small>
+
+</div>
+
+
+<div class="tool"
+onclick="selectTool('Business')">
+
+💼
+
+<b>Business</b>
+
+<small>
+Idées, offres, stratégie
+</small>
+
+</div>
+
+
+<div class="tool"
+onclick="selectTool('Écriture')">
+
+✍️
+
+<b>Écrire</b>
+
+<small>
+Messages, textes et documents
+</small>
+
+</div>
+
+
+<div class="tool"
+onclick="selectTool('Documents')">
+
+📄
+
+<b>Documents</b>
+
+<small>
+Résumer et analyser
+</small>
+
+</div>
+
+
+<div class="tool"
+onclick="selectTool('Contenu')">
+
+📱
+
+<b>Contenu</b>
+
+<small>
+Facebook, WhatsApp et marketing
+</small>
+
+</div>
+
+
+<div class="tool"
+onclick="selectTool('Code')">
+
+💻
+
+<b>Code</b>
+
+<small>
+Programmer et corriger
+</small>
+
+</div>
+
+</div>
+
+
+<div id="task" class="hidden">
+
+<div class="section">
+
+<h3 id="taskTitle">
+Ta demande
+</h3>
+
+<textarea
+id="prompt"
+placeholder="Écris ce que tu veux que l'IA fasse..."
+></textarea>
+
+<div class="actions">
+
+<button class="primary"
+onclick="generateDemo()">
+Générer
+</button>
+
+<button class="secondary"
+onclick="closeTask()">
+Changer d'outil
+</button>
+
+</div>
+
+<p class="note">
+Prototype : le moteur IA réel n'est pas encore connecté.
+Cette version sert à tester l'interface et l'intérêt des utilisateurs.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>
+💳 Packs de crédits
+</h2>
+
+<div class="prices">
+
+<div class="price">
+
+<b>Découverte</b>
+
+<strong>$1</strong>
+
+<p>
+100 crédits
+</p>
+
+<button class="secondary"
+onclick="paymentDemo()">
+Acheter
+</button>
+
+</div>
+
+
+<div class="price">
+
+<b>Standard</b>
+
+<strong>$5</strong>
+
+<p>
+700 crédits
+</p>
+
+<button class="secondary"
+onclick="paymentDemo()">
+Acheter
+</button>
+
+</div>
+
+
+<div class="price">
+
+<b>Pro</b>
+
+<strong>$10</strong>
+
+<p>
+1 600 crédits
+</p>
+
+<button class="secondary"
+onclick="paymentDemo()">
+Acheter
+</button>
+
+</div>
+
+</div>
+
+<p class="note">
+
+Les prix et crédits sont des hypothèses.
+Nous allons les tester avant de connecter un vrai paiement.
+
+</p>
+
+</section>
+
+
+<section class="section">
+
+<h2>
+📊 Mon compte
+</h2>
+
+<p style="margin-top:12px;">
+Crédits disponibles :
+<span id="credits">100</span>
+</p>
+
+<h3 style="margin-top:25px;">
+Historique
+</h3>
+
+<ul class="history" id="history">
+
+<li>
+Aucune utilisation pour le moment.
+</li>
+
+</ul>
+
+</section>
+
+
+<footer>
+
+AI Pass RDC — Prototype de validation commerciale
+
+</footer>
+
+</div>
+
+
+<script>
+
+let selectedTool = "";
+
+let credits = 100;
+
+
+function selectTool(tool){
+
+selectedTool = tool;
+
+document
+.getElementById("task")
+.classList
+.remove("hidden");
+
+document
+.getElementById("taskTitle")
+.textContent = "🤖 " + tool;
+
+document
+.getElementById("prompt")
+.focus();
+
+}
+
+
+function closeTask(){
+
+document
+.getElementById("task")
+.classList
+.add("hidden");
+
+}
+
+
+function generateDemo(){
+
+let prompt =
+document
+.getElementById("prompt")
+.value
+.trim();
+
+if(prompt === ""){
+
+alert("Écris d'abord ta demande.");
+
+return;
+
+}
+
+
+if(credits < 10){
+
+alert("Crédits insuffisants.");
+
+return;
+
+}
+
+
+credits -= 10;
+
+document
+.getElementById("credits")
+.textContent = credits;
+
+
+let history =
+document
+.getElementById("history");
+
+
+if(history.children.length === 1 &&
+history.children[0].textContent.includes("Aucune")){
+
+history.innerHTML = "";
+
+}
+
+
+let item =
+document.createElement("li");
+
+item.textContent =
+"✓ " +
+selectedTool +
+" — 10 crédits utilisés — démonstration générée";
+
+
+history.prepend(item);
+
+
+alert(
+"Démo générée.\n\n" +
+"Dans la prochaine version, cette action appellera réellement un modèle IA."
+);
+
+}
+
+
+function paymentDemo(){
+
+alert(
+"Paiement Mobile Money\n\n" +
+"Cette fonction sera connectée après validation du prototype."
+);
+
+}
+
+</script>
+
+</body>
+</html>
